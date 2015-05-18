@@ -1,18 +1,22 @@
-postgres:
-  image: convox/postgres
-redis:
-  image: convox/redis
 web:
   build: .
-  command: rails server -b 0.0.0.0
+  command: bin/web
   links:
    - postgres
    - redis
   ports:
    - "3000:3000"
+  volumes:
+    .:/app
 worker:
   build: .
-  command: bundle exec sidekiq
+  command: bin/worker
   links:
    - postgres
    - redis
+  volumes:
+    .:/app
+postgres:
+  image: convox/postgres
+redis:
+  image: convox/redis
