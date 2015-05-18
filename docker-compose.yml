@@ -7,7 +7,7 @@ web:
   ports:
    - "3000:3000"
   volumes:
-    .:/app
+   - .:/app
 worker:
   build: .
   command: bin/worker
@@ -15,7 +15,7 @@ worker:
    - postgres
    - redis
   volumes:
-    .:/app
+   - .:/app
 postgres:
   image: convox/postgres
 redis:
